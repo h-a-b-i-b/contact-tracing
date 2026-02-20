@@ -32,14 +32,14 @@ public with sharing class CTPersonController {
             return new List<Person__c>();
         }
     
-        String likePattern = '%' + String.escapeSingleQuotes(searchTerm.trim()) + '%';
+        searchTerm = String.escapeSingleQuotes(searchTerm.trim()) + '%';
     
         return [
             SELECT Id, Name, OwnerId, Health_Status__c, Mobile__c, Status_Update_Date__c, Token__c
             FROM Person__c
-            WHERE Name LIKE :likePattern
-            OR Mobile__c LIKE :likePattern
-            OR Token__c LIKE :likePattern
+            WHERE Name LIKE :searchTerm
+            OR Mobile__c LIKE :searchTerm
+            OR Token__c LIKE :searchTerm
             ORDER BY Status_Update_Date__c DESC NULLS LAST
         ];
     }
@@ -50,11 +50,16 @@ public with sharing class CTPersonController {
      * @return A Person__c record that matches the provided Id, or null if no record is found.
      */
     public static Person__c getPersonById(String personId){
-        return [
+        List<Person__c> persons = [
             SELECT Id, Name, OwnerId, Health_Status__c, Mobile__c, Status_Update_Date__c, Token__c
             FROM Person__c
             WHERE Id = :personId
             LIMIT 1
         ];
+
+        if (!persons.isEmpty()) {
+            return persons[0];
+        }
+        return null;
     }
 }
