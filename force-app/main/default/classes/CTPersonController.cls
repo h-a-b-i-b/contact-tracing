@@ -62,4 +62,22 @@ public with sharing class CTPersonController {
         }
         return null;
     }
+
+    /**
+     * This method retrieves the count of Person__c records grouped by their Health_Status__c field.
+     * @return A Map containing health statuses as keys and their corresponding record counts as values.
+     */
+    public static Map<String, Integer> getHealthStatusCount(){
+
+        Map<String, Integer> healthStatusCountMap = new Map<String, Integer>();
+
+        for(AggregateResult result: [SELECT Count(Id) numberOfPerson, Health_Status__c FROM Person__c GROUP BY Health_Status__c]){
+
+            String healthStatus = String.valueOf(result.get('Health_Status__c'));
+            Integer count = Integer.valueOf(result.get('numberOfPerson'));
+            
+            healthStatusCountMap.put(healthStatus, count);
+        }
+        return healthStatusCountMap;
+    }
 }
