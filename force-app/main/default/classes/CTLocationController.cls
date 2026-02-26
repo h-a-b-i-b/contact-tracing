@@ -49,4 +49,19 @@ public with sharing class CTLocationController {
         return null; 
     }
 
+    /**
+     * This method retrieves a count of Location__c records grouped by their Status__c field.
+     * @return A Map<String, Integer> where the key is the Status__c value and the value is the count of Location__c records with that status.
+     */
+    public static Map<String, Integer> getStstusCount(){
+
+        Map<String, Integer> statusCountMap = new Map<String, Integer>();
+
+        for (AggregateResult ar : [SELECT Status__c, Count(Id) locationCount FROM Location__c GROUP BY Status__c]) {
+            String status = String.valueOf(ar.get('Status__c'));
+            Integer count = Integer.valueOf(ar.get('locationCount'));
+            statusCountMap.put(status, count);
+        }
+        return statusCountMap;
+    }
 }
