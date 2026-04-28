@@ -1,9 +1,14 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
     <applicationVisibilities>
         <application>Contact_Tracing</application>
         <visible>true</visible>
     </applicationVisibilities>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Location_Tracing__c.Composite_Key__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
         <field>Location__c.Red_Score__c</field>
@@ -21,12 +26,12 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>People_Tracing__c.Contact_Type__c</field>
+        <field>People_Tracing__c.Contact_Date__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>People_Tracing__c.Contact_Date__c</field>
+        <field>People_Tracing__c.Contact_Type__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

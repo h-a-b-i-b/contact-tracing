@@ -34,17 +34,15 @@ public with sharing class CTLocationTracingController {
      */
     public static List<Location_Tracing__c> checkDuplicates(List<Location_Tracing__c> locationTraces) {
 
-        if(locationTraces == null || locationTraces.isEmpty()) return new List<Location_Tracing__c>();
-
+        // Set of locationIds and personIds from the input list to check against existing records
         Set<Id> locationIds = new Set<Id>();
         Set<Id> personIds = new Set<Id>();
+        List<Location_Tracing__c> duplicateLocationTraces;
 
         for (Location_Tracing__c lt : locationTraces) {
             locationIds.add(lt.Location__c);
             personIds.add(lt.Person__c);
         }
-
-        if(locationIds.isEmpty() || personIds.isEmpty()) return new List<Location_Tracing__c>();
         
         // Query existing locations traces
         List<Location_Tracing__c> existingLocationTracings = [SELECT Id, Person__c, Location__c FROM Location_Tracing__c WHERE Location__c IN :locationIds AND Person__c IN :personIds];
@@ -62,7 +60,7 @@ public with sharing class CTLocationTracingController {
             }
 
             // List to hold duplicate location traces
-            List<Location_Tracing__c> duplicateLocationTraces = new List<Location_Tracing__c>();
+            duplicateLocationTraces = new List<Location_Tracing__c>();
 
             for (Location_Tracing__c lt : locationTraces) {
                 if (locationPersonIdsMap.containsKey(lt.Location__c) && locationPersonIdsMap.get(lt.Location__c).contains(lt.Person__c)) {
