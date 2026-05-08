@@ -64,4 +64,44 @@ public with sharing class CTLocationController {
         }
         return statusCountMap;
     }
+
+    // Update red score and status of the location based on the number of red visitors in the last 10 days
+    public static void updateRedscoreAndStatus (Set<Id> locationIds) {
+        AggregateResult[] redScoreResults = [
+            SELECT Location__c, COUNT(Id) redVisitorCount
+            FROM Location_Tracing__c
+            WHERE Location__c IN :locationIds
+            AND Visit_Date__c = LAST_N_DAYS:10
+            AND Person__r.Health_Status__c = 'Red'
+            GROUP BY Location__c
+        ];
+
+        List<Location__c> locationsToUpdate = new List<Location__c>();
+
+        for(AggregateResult ar: redScoreResults) {
+            Id locationId = (Id) ar.get('Location__c');
+            Integer redScore = (Integer) ar.get('redVisitorCount');
+            String locationStatus = getLocationStatus(redScore);
+
+            locationsToUpdate.add(
+                new Location__c (
+                    Id = locationId,
+                    Red_Score__c = redScore,
+                    Status__c = locationStatus
+                )
+            );
+        }
+    }
+
+    // Helper to get location status based on redScore
+    private static String getLocationStatus (Integer redScore) {
+        if(redScore == 0) {
+            return 'Green';
+        } else if ( redScore <= 5) {
+            return 'Yellow';
+        } else if ( redScore <= 10) {
+            return 'Orange';
+        }
+        return 'Red';
+    }
 }

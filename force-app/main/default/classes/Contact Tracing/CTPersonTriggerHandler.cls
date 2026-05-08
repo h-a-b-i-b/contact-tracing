@@ -77,6 +77,19 @@ public with sharing class CTPersonTriggerHandler {
         if (!personsToUpdate.isEmpty()) {
             update personsToUpdate;
         }
+
+        // Update red score and status of locations visited in last 10 days by the person whose status changed to red
+        // Get the location traces by person Ids
+        Set<Id> locationIds = new Set<Id>();
+
+        List<Location_Tracing__c> locationTraces = CTLocationTracingController.getLocationsByPersonIds(statusChanged);
+
+        for(Location_Tracing__c trace: locationTraces) {
+            locationIds.add(trace.Location__c);
+        }
+
+        // Update the red score and status of the locations
+        CTLocationController.updateRedscoreAndStatus(locationIds);
     }
 
     // Helper to build person records
