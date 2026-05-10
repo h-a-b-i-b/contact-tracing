@@ -37,7 +37,7 @@ public with sharing class CTLocationTracingController {
         // Set of locationIds and personIds from the input list to check against existing records
         Set<Id> locationIds = new Set<Id>();
         Set<Id> personIds = new Set<Id>();
-        List<Location_Tracing__c> duplicateLocationTraces;
+        List<Location_Tracing__c> duplicateLocationTraces = new List<Location_Tracing__c>();
 
         for (Location_Tracing__c lt : locationTraces) {
             locationIds.add(lt.Location__c);
@@ -58,9 +58,6 @@ public with sharing class CTLocationTracingController {
                 }
                 locationPersonIdsMap.get(lt.Location__c).add(lt.Person__c);
             }
-
-            // List to hold duplicate location traces
-            duplicateLocationTraces = new List<Location_Tracing__c>();
 
             for (Location_Tracing__c lt : locationTraces) {
                 if (locationPersonIdsMap.containsKey(lt.Location__c) && locationPersonIdsMap.get(lt.Location__c).contains(lt.Person__c)) {
