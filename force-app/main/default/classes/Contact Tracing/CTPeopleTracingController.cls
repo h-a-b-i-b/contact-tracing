@@ -12,16 +12,16 @@ public with sharing class CTPeopleTracingController {
     /**
      * This method checks for duplicate People_Tracing__c records based on the Person_1__c and Person_2__c fields. It takes a list of People_Tracing__c records as input and returns a list of records that are considered duplicates.
      * A record is considered a duplicate if there is an existing People_Tracing__c record in the database with the same Person_1__c and Person_2__c values.
-     * @param PeopleTraces A list of People_Tracing__c records to check for duplicates.
+     * @param newPeopleTraces A list of People_Tracing__c records to check for duplicates.
      * @return A list of People_Tracing__c records that are identified as duplicates based on the Person_1__c and Person_2__c fields.
      */
-    public static List<People_Tracing__c> checkDuplicates(List<People_Tracing__c> PeopleTraces){
+    public static List<People_Tracing__c> checkDuplicates(List<People_Tracing__c> newPeopleTraces){
 
-        if(PeopleTraces == null || PeopleTraces.isEmpty()) return new List<People_Tracing__c>();
+        if(newPeopleTraces == null || newPeopleTraces.isEmpty()) return new List<People_Tracing__c>();
 
         Set<Id> personIds = new Set<Id>();
 
-        for (People_Tracing__c pt : PeopleTraces) {
+        for (People_Tracing__c pt : newPeopleTraces) {
             personIds.add(pt.Person_1__c);
             personIds.add(pt.Person_2__c);
         }
@@ -44,12 +44,14 @@ public with sharing class CTPeopleTracingController {
 
         List<People_Tracing__c> duplicates = new List<People_Tracing__c>();
 
-        for (People_Tracing__c pt : PeopleTraces) {
-            if (pt.Person_1__c == pt.Person_2__c || existingPeopleTracesMap.containsKey(pt.Person_1__c) && existingPeopleTracesMap.get(pt.Person_1__c).contains(pt.Person_2__c)) {
-                duplicates.add(pt);
+        if(!existingPeopleTraces.isEmpty()) {
+            for (People_Tracing__c pt : newPeopleTraces) {
+                Boolean isExisted = existingPeopleTracesMap.containsKey(pt.Person_1__c) && existingPeopleTracesMap.get(pt.Person_1__c).contains(pt.Person_2__c);
+                if (pt.Person_1__c == pt.Person_2__c || isExisted){
+                    duplicates.add(pt);
+                }
             }
         }
         return duplicates;
     }
-
 }
