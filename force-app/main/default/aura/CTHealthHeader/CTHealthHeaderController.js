@@ -1,5 +1,7 @@
 ({
-    myAction : function(component, event, helper) {
+    onInit : function(component, event, helper) {
+    },
 
+    onSelectedTabChange : function(component, event, helper) {
     }
 })

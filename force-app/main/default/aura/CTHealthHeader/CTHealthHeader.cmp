@@ -1,7 +1,13 @@
 <aura:component>
+
+    <!-- Register the init hook -->
+    <aura:handler name="init" value="{!this}" action="{!c.onInit}" />
     
     <!-- Attributes -->
     <aura:attribute name="selectedTabLabel" type="String" default="person_view"/>
+
+    <!-- Watch for changes on attributes -->
+    <aura:handler name="change" value="{!v.selectedTabLabel}" action="{!c.onSelectedTabChange}" />
 
     <div class="slds-page-header slds-page-header_record-home">
         <div class="slds-page-header__row">
