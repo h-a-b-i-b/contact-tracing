@@ -1,4 +1,8 @@
 <aura:component>
+    
+    <!-- Attributes -->
+    <aura:attribute name="selectedTabLabel" type="String" default="person_view"/>
+
     <div class="slds-page-header slds-page-header_record-home">
         <div class="slds-page-header__row">
             <div class="slds-page-header__col-title">
@@ -15,7 +19,7 @@
                                 <h1>
                                     <span>Contact Tracing</span>
                                     <span class="slds-page-header__title "
-                                        title="Acme - 1,200 Widgets">Person view</span>
+                                        title="Acme - 1,200 Widgets">{!v.selectedTabLabel}</span>
                                 </h1>
                             </div>
                         </div>
