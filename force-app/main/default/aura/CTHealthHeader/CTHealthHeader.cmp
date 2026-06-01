@@ -2,12 +2,10 @@
 
     <!-- Register the init hook -->
     <aura:handler name="init" value="{!this}" action="{!c.onInit}" />
-    
-    <!-- Attributes -->
-    <aura:attribute name="selectedTabLabel" type="String" default="person_view"/>
 
-    <!-- Watch for changes on attributes -->
-    <aura:handler name="change" value="{!v.selectedTabLabel}" action="{!c.onSelectedTabChange}" />
+    <!-- Attributes -->
+    <aura:attribute name="headerTitle" type="String" default="Person View" />
+    <aura:attribute name="scope" type="String" default="person" />
 
     <div class="slds-page-header slds-page-header_record-home">
         <div class="slds-page-header__row">
@@ -25,7 +23,7 @@
                                 <h1>
                                     <span>Contact Tracing</span>
                                     <span class="slds-page-header__title "
-                                        title="Acme - 1,200 Widgets">{!v.selectedTabLabel}</span>
+                                        title="{!v.headerTitle}">{!v.headerTitle}</span>
                                 </h1>
                             </div>
                         </div>
@@ -37,7 +35,8 @@
                     <div class="slds-page-header__control">
                         <ul class="slds-button-group-list">
                             <li>
-                                <button class="slds-button slds-button_neutral">Add Items</button>
+                                <button class="slds-button slds-button_neutral" onclick="{!c.createRecord}">Add
+                                    Items</button>
                             </li>
                         </ul>
                     </div>

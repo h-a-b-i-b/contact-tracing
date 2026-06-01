@@ -1,14 +1,8 @@
 ({
-    handleTabClick : function(component, event, helper) {
-        // Selected tab id
-        var selectedTabId = component.get("v.selectedTabId");
+    tabSelectHandler : function(component, event, helper) {
+        var selectedTabId = event.getParam("id");
 
-        // Create a lookup map for your labels
-        var tabLabels = {
-            "person_view": "Person View",
-            "location_view": "Location View"
-        };
-
-        component.set("v.selectedTabLabel", tabLabels[selectedTabId]);
+        component.set("v.headerTitle", selectedTabId === "person" ? "Person View" : "Location View");
+        component.set("v.scope", selectedTabId);
     }
 })
