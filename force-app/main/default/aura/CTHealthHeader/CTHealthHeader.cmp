@@ -1,4 +1,4 @@
-<aura:component>
+<aura:component controller="CTHealthHeaderController">
 
     <!-- Register the init hook -->
     <aura:handler name="init" value="{!this}" action="{!c.onInit}" />
@@ -6,6 +6,8 @@
     <!-- Attributes -->
     <aura:attribute name="headerTitle" type="String" default="Person View" />
     <aura:attribute name="scope" type="String" default="person" />
+    <aura:attribute name="personStatusMap" type="Map" default="{'Green': 0, 'Yellow': 0, 'Orange': 0, 'Red': 0}" />
+    <aura:handler name="change" value="{!v.scope}" action="{!c.handleDataChange}"/>
 
     <div class="slds-page-header slds-page-header_record-home">
         <div class="slds-page-header__row">
@@ -48,19 +50,19 @@
                 <ul class="slds-page-header__detail-row">
                     <li class="slds-page-header__detail-block">
                         <div class="header-item green" title="Green">Green</div>
-                        <div class="header-item green" title="23">23</div>
+                        <div class="header-item green" title="{!v.personStatusMap.Green}">{!v.personStatusMap.Green}</div>
                     </li>
                     <li class="slds-page-header__detail-block">
                         <div class="header-item yellow" title="Yellow">Yellow</div>
-                        <div class="header-item yellow" title="23">12</div>
+                        <div class="header-item yellow" title="{!v.personStatusMap.Yellow}">{!v.personStatusMap.Yellow}</div>
                     </li>
                     <li class="slds-page-header__detail-block">
                         <div class="header-item orange" title="Orange">Orange</div>
-                        <div class="header-item orange" title="23">21</div>
+                        <div class="header-item orange" title="{!v.personStatusMap.Orange}">{!v.personStatusMap.Orange}</div>
                     </li>
                     <li class="slds-page-header__detail-block">
                         <div class="header-item red" title="Red">Red</div>
-                        <div class="header-item red" title="23">08</div>
+                        <div class="header-item red" title="{!v.personStatusMap.Red}">{!v.personStatusMap.Red}</div>
                     </li>
                 </ul>
             </div>
