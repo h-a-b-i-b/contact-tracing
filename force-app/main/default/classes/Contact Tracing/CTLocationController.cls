@@ -53,7 +53,7 @@ public with sharing class CTLocationController {
      * This method retrieves a count of Location__c records grouped by their Status__c field.
      * @return A Map<String, Integer> where the key is the Status__c value and the value is the count of Location__c records with that status.
      */
-    public static Map<String, Integer> getStstusCount(){
+    public static Map<String, Integer> getHealthStatusCount(){
 
         Map<String, Integer> statusCountMap = new Map<String, Integer>();
 

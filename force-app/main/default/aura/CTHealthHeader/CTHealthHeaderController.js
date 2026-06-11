@@ -1,10 +1,9 @@
 ({
-    onInit : function(cmp, event, helper) {
-        // 
-        helper.callPersonStatusCount(cmp);
+    onInit: function (component, event, helper) {
+        helper.getHealthStatusCount(component);
     },
 
-    createRecord : function(component, event, helper) {
+    createRecord: function (component, event, helper) {
         const createRecordEvent = $A.get("e.force:createRecord");
         const scope = component.get("v.scope");
 
@@ -14,15 +13,7 @@
         createRecordEvent.fire();
     },
 
-    handleDataChange : function(component, event, helper) {
-        // Get the updated value
-        var newValue = event.getParam("value");
-
-        // Perform your action here (e.g., call Apex, modify other attributes, etc.)
-        if (newValue === "person") {
-            helper.callPersonStatusCount(component);
-        } else if (newValue === "location") {
-            helper.callLocationStatusCount(component);
-        }
+    refreshStatusCounts: function (component, event, helper) {
+        helper.getHealthStatusCount(component);
     }
 })

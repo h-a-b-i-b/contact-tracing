@@ -6,8 +6,10 @@
     <!-- Attributes -->
     <aura:attribute name="headerTitle" type="String" default="Person View" />
     <aura:attribute name="scope" type="String" default="person" />
-    <aura:attribute name="personStatusMap" type="Map" default="{'Green': 0, 'Yellow': 0, 'Orange': 0, 'Red': 0}" />
-    <aura:handler name="change" value="{!v.scope}" action="{!c.handleDataChange}"/>
+    <aura:attribute name="statusCounts" type="Map" default="{'Green': 0, 'Yellow': 0, 'Orange': 0, 'Red': 0}" />
+
+    <!-- Handlers -->
+    <aura:handler name="change" value="{!v.scope}" action="{!c.refreshStatusCounts}"/>
 
     <div class="slds-page-header slds-page-header_record-home">
         <div class="slds-page-header__row">
@@ -50,19 +52,22 @@
                 <ul class="slds-page-header__detail-row">
                     <li class="slds-page-header__detail-block">
                         <div class="header-item green" title="Green">Green</div>
-                        <div class="header-item green" title="{!v.personStatusMap.Green}">{!v.personStatusMap.Green}</div>
+                        <div class="header-item green" title="{!v.statusCounts.Green}">{!v.statusCounts.Green}
+                        </div>
                     </li>
                     <li class="slds-page-header__detail-block">
                         <div class="header-item yellow" title="Yellow">Yellow</div>
-                        <div class="header-item yellow" title="{!v.personStatusMap.Yellow}">{!v.personStatusMap.Yellow}</div>
+                        <div class="header-item yellow" title="{!v.statusCounts.Yellow}">{!v.statusCounts.Yellow}
+                        </div>
                     </li>
                     <li class="slds-page-header__detail-block">
                         <div class="header-item orange" title="Orange">Orange</div>
-                        <div class="header-item orange" title="{!v.personStatusMap.Orange}">{!v.personStatusMap.Orange}</div>
+                        <div class="header-item orange" title="{!v.statusCounts.Orange}">{!v.statusCounts.Orange}
+                        </div>
                     </li>
                     <li class="slds-page-header__detail-block">
                         <div class="header-item red" title="Red">Red</div>
-                        <div class="header-item red" title="{!v.personStatusMap.Red}">{!v.personStatusMap.Red}</div>
+                        <div class="header-item red" title="{!v.statusCounts.Red}">{!v.statusCounts.Red}</div>
                     </li>
                 </ul>
             </div>

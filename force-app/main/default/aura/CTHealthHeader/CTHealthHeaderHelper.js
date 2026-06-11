@@ -1,58 +1,27 @@
 ({
-    callPersonStatusCount : function(cmp) {
-        console.log('Helper callPersonStatusCount called...');
-        
-        var action = cmp.get("c.getPersonHealthStatusCounts");
+    getHealthStatusCount: function (cmp) {
+        const scope = cmp.get("v.scope");
+        const action = (scope === 'person') ? cmp.get("c.getPersonHealthStatusCounts") : cmp.get("c.getLocationHealthStatusCounts");
 
-        action.setCallback(this, function(response) {
-            
-            var state = response.getState();
+        action.setCallback(this, function (response) {
 
-            if (state === "SUCCESS") {
-                cmp.set('v.personStatusMap', Object.assign(cmp.get('v.personStatusMap'), response.getReturnValue()) || {});
-            }
-            else if (state === "INCOMPLETE") {
-                // do something
-            }
-            else if (state === "ERROR") {
-                var errors = response.getError();
-                if (errors) {
-                    if (errors[0] && errors[0].message) {
-                        console.log("Error message: " + 
-                                 errors[0].message);
-                    }
-                } else {
-                    console.log("Unknown error");
-                }
-            }
-        });
-        $A.enqueueAction(action);
-    },
-
-    callLocationStatusCount : function(cmp) {
-        console.log('Helper callLocationStatusCount called...');
-        
-        var action = cmp.get("c.getLocationHealthStatusCounts");
-
-        action.setCallback(this, function(response) {
-            
-            var state = response.getState();
+            const state = response.getState();
 
             if (state === "SUCCESS") {
-                cmp.set('v.personStatusMap', Object.assign(cmp.get('v.personStatusMap'), response.getReturnValue()) || {});
+                cmp.set('v.statusCounts', Object.assign({}, cmp.get('v.statusCounts'), response.getReturnValue()));
             }
-            else if (state === "INCOMPLETE") {
-                // do something
+            else if(state === "INCOMPLETE") {
+                console.warn('Server response incomplete');
             }
             else if (state === "ERROR") {
-                var errors = response.getError();
+                const errors = response.getError();
                 if (errors) {
                     if (errors[0] && errors[0].message) {
-                        console.log("Error message: " + 
-                                 errors[0].message);
+                        console.error("Error message: " +
+                            errors[0].message);
                     }
                 } else {
-                    console.log("Unknown error");
+                    console.error("Unknown error");
                 }
             }
         });

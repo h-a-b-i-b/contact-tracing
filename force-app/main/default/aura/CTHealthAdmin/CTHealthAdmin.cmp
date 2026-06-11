@@ -10,7 +10,7 @@
         <lightning:layout multipleRows="true" class="main-component">
             <lightning:layoutItem size="12">
                 <!-- Header section -->
-                <c:CTHealthHeader headerTitle="{!v.headerTitle}" scope="{!v.scope}" />
+                <c:CTHealthHeader headerTitle="{!v.headerTitle}" scope="{!v.scope}" aura:id="health-header"/>
             </lightning:layoutItem>
             <lightning:layoutItem size="12">
                 <lightning:tabset variant="vertical" selectedTabId="{!v.selectedTabId}" onselect="{!c.tabSelectHandler}">
