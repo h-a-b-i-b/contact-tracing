@@ -15,10 +15,10 @@
             <lightning:layoutItem size="12">
                 <lightning:tabset variant="vertical" selectedTabId="{!v.selectedTabId}" onselect="{!c.tabSelectHandler}">
                     <lightning:tab label="Person View" id="person" >
-                        Person View
+                        <c:CTRecentChanges scope="{! v.scope }"/>
                     </lightning:tab>
                     <lightning:tab label="Location View" id="location">
-                        Location View
+                        <c:CTRecentChanges scope="{! v.scope }"/>
                     </lightning:tab>
                 </lightning:tabset>
 
