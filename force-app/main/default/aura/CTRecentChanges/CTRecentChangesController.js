@@ -22,5 +22,13 @@
 
         cmp.set("v.columns", scope === 'person' ? personColumns : locationColumns);
         helper.getRecords(cmp, scope);
-    }
+    },
+
+    refreshComponentState : function () {
+        
+    },
+
+    handleOnCommit: function (cmp, evt, helper) {
+        helper.getSearchResult(cmp)
+    },
 })

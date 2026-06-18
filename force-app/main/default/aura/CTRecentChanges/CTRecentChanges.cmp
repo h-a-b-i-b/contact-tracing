@@ -2,6 +2,7 @@
 
     <!-- attributes -->
     <aura:attribute name="data" type="List"/>
+    <aura:attribute name="initialData" type="List"/>
     <aura:attribute name="columns" type="List"/>
     <aura:attribute name="scope" type="String" default="person"/>
 
@@ -12,7 +13,7 @@
     <div class="container">
         <lightning:card title="Recent Updates">
             <aura:set attribute="actions">
-                <lightning:input name="enter-search" aura:id="enter-search" type="search" label="Hit 'enter' to search" placeholder="Search anything..."/>
+                <lightning:input name="enter-search" aura:id="enter-search" type="search" oncommit="{! c.handleOnCommit }" label="Hit 'enter' to search" placeholder="Search anything..."/>
             </aura:set>
             <p class="slds-p-horizontal_small">
                 <!-- <div style="height: 300px"> -->
