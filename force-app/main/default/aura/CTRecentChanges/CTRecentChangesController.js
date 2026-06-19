@@ -1,5 +1,5 @@
 ({
-    init : function(cmp, event, helper) {
+    init: function (cmp, event, helper) {
 
         const personColumns = [
             { label: "Person Name", fieldName: "Name", type: "text" },
@@ -24,11 +24,13 @@
         helper.getRecords(cmp, scope);
     },
 
-    refreshComponentState : function () {
-        
+    refreshComponentState: function () {
+
     },
 
     handleOnCommit: function (cmp, evt, helper) {
-        helper.getSearchResult(cmp)
-    },
+        var searchTerm = cmp.find('enter-search').get('v.value');
+
+        helper.filterDataByTerm(cmp, searchTerm);
+    }
 })

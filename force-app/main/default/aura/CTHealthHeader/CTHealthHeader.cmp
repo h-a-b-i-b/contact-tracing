@@ -9,7 +9,7 @@
     <aura:attribute name="statusCounts" type="Map" default="{'Green': 0, 'Yellow': 0, 'Orange': 0, 'Red': 0}" />
 
     <!-- Handlers -->
-    <aura:handler name="change" value="{!v.scope}" action="{!c.refreshStatusCounts}"/>
+    <aura:handler name="change" value="{!v.scope}" action="{!c.refreshStatusCounts}" />
 
     <div class="slds-page-header slds-page-header_record-home">
         <div class="slds-page-header__row">

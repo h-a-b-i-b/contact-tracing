@@ -45,5 +45,31 @@
         });
         
         $A.enqueueAction(action);
+    },
+
+    filterDataByTerm : function(cmp, searchTerm) {
+        const data = cmp.get("v.initialData");
+        if (!data) return;
+
+        const cleanedSearchTerm = searchTerm ? String(searchTerm).trim().toLowerCase() : '';
+        var filteredData = [];
+
+        if (cleanedSearchTerm === '') {
+            cmp.set("v.data", data);
+            return;
+        }
+
+        data.forEach(function(item) {
+            if (item) {
+                const itemValuesString = Object.values(item).toString().toLowerCase();
+                
+                if (itemValuesString.includes(cleanedSearchTerm)) {
+                    filteredData.push(item);
+                }
+            }
+        });
+
+        cmp.set("v.data", filteredData); 
     }
+
 })
