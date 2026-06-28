@@ -1,5 +1,9 @@
 <aura:component controller="CTRecentChangesController">
 
+    <!-- Events -->
+    <aura:registerEvent name="personSelectEvent" type="c:CTPersonSelect" />
+    <aura:registerEvent name="locationSelectEvent" type="c:CTLocationSelect" />
+
     <!-- attributes -->
     <aura:attribute name="data" type="List"/>
     <aura:attribute name="initialData" type="List"/>
@@ -18,10 +22,12 @@
             <p class="slds-p-horizontal_small">
                 <!-- <div style="height: 300px"> -->
                     <lightning:datatable
-                            keyField="id"
-                            data="{! v.data }"
-                            columns="{! v.columns }"
-                            hideCheckboxColumn="true"/>
+                        keyField="id"
+                        data="{! v.data }"
+                        columns="{! v.columns }"
+                        hideCheckboxColumn="true"
+                        onrowaction="{! c.handleRowAction }"
+                    />
                 <!-- </div> -->
             </p>
         </lightning:card>
