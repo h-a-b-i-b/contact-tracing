@@ -1,0 +1,24 @@
+<aura:component>
+
+    <!-- Attributes -->
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="status" type="String" />
+    <aura:attribute name="fields" type="String[]"
+        default="['Name','Status__c','Address__c','Pincode__c','Red_Score__c','Status_Update_Date__c']" />
+
+    <!-- handlers -->
+    <aura:handler event="c.CTLocationSelect" action="{!c.handleLocationSelectEvent}" />
+
+    <aura:if isTrue="{! !empty(v.recordId)}">
+        <div class="{! 'location-card ' + v.status}">
+            <lightning:recordForm 
+                recordId="{!v.recordId}" 
+                objectApiName="Location__c" 
+                fields="{!v.fields}"
+                columns="1" 
+                mode="readonly"
+            />
+        </div>
+    </aura:if>
+
+</aura:component>

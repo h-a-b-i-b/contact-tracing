@@ -17,7 +17,14 @@
                         <c:CTRecentChanges scope="{! v.scope }"/>
                     </lightning:tab>
                     <lightning:tab label="Location View" id="location">
-                        <c:CTRecentChanges scope="{! v.scope }"/>
+                        <lightning:layout>
+                            <lightning:layoutItem size="8" padding="horizontal-small">
+                                <c:CTRecentChanges scope="{! v.scope }"/>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem size="4" padding="horizontal-small">
+                                <c:CTLocationView/>
+                            </lightning:layoutItem>
+                        </lightning:layout>
                     </lightning:tab>
                 </lightning:tabset>
 
