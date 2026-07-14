@@ -198,4 +198,23 @@ public with sharing class CTPersonController {
         }
         return secondaryContacts;
     }
+
+    /**
+     * Update health status to red
+     * @param recordId
+     */
+    public static void updateStatusToRed(String recordId){
+        
+        List<Person__c> persons = [
+            SELECT Id, Health_Status__c 
+            FROM Person__c 
+            WHERE Id = :recordId
+        ];
+
+        for (Person__c person : persons) {
+            person.Health_Status__c = 'Red';
+        }
+
+        update persons;
+    }
 }

@@ -41,8 +41,7 @@
     },
 
     handleRowAction: function (cmp, evt, helper) {
-        console.log('Handle Row Action fired...');
-
+        
         const action = evt.getParam('action');
         const row = evt.getParam('row');
         const scope = cmp.get("v.scope");
