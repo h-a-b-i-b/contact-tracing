@@ -1,0 +1,90 @@
+<aura:component controller="CTUserTabController" implements="force:appHostable">
+
+    <!-- Attributes -->
+    <aura:attribute name="personDetails" type="Object" />
+    <aura:attribute name="data" type="Object" />
+    <aura:attribute name="columns" type="List" />
+
+    <div class="main-container">
+        <div class="header-container">
+            <!-- Page Header -->
+            <div class="slds-page-header">
+                <div class="slds-page-header__row">
+                    <div class="slds-page-header__col-title">
+                        <div class="slds-media">
+                            <div class="slds-media__figure">
+                                <span class="slds-icon_container slds-icon-standard-opportunity" title="opportunity">
+                                </span>
+                            </div>
+                            <div class="slds-media__body">
+                                <div class="slds-page-header__name">
+                                    <div class="slds-page-header__name-title">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-page-header__col-actions">
+                        <div class="slds-page-header__controls">
+                            <div class="slds-page-header__control">
+                                <lightning:input name="user-input" aura:id="user-input" label="Enter user record Id"
+                                    placeholder="type here..." value="a03IS000001Ny8EYAS" />
+                                <lightning:button label="Search User" title="Search User"
+                                    onclick="{! c.handleClick }" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-container slds-align_absolute-center">
+            <aura:if isTrue="{!v.personDetails}">
+    
+                <!-- SLDS 1 -->
+                <article class="slds-card card-style">
+                    <div class="{! v.personDetails.status + ' slds-card__header slds-grid slds-p-around_small'}">
+                        <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                            <div class="slds-media__body">
+                                <h2 class="slds-card__header-title">
+                                    <span>{!v.personDetails.name + ', your health status is ' +
+                                        v.personDetails.status}</span>
+                                </h2>
+                            </div>
+                        </header>
+                    </div>
+                    <div class="slds-card__body slds-card__body_inner">
+                        <!-- Card Body -->
+                         <div class="table-container">
+                             <table>
+                                 <tr>
+                                     <th>Phone</th>
+                                     <th>Token</th>
+                                     <th>Status Updated On</th>
+                                     <th>Contacts in Last 30 Days</th>
+         
+                                 </tr>
+         
+                                 <tr>
+                                     <td>{!v.personDetails.phone}</td>
+                                     <td>{!v.personDetails.token}</td>
+                                     <td>{!v.personDetails.statusUpdateOn}</td>
+                                     <td>{!v.personDetails.contactsCount}</td>
+         
+                                 </tr>
+         
+                             </table>
+                         </div>
+    
+                        <div style="height: 300px">
+                            <h1> Recent Contacts</h1>
+                            <lightning:datatable keyField="id" data="{! v.data }" columns="{! v.columns }" hideCheckboxColumn="true" />
+                        </div>
+                    </div>
+                    <footer class="slds-card__footer"></footer>
+                </article>
+            </aura:if>
+        </div>
+    </div>
+
+</aura:component>

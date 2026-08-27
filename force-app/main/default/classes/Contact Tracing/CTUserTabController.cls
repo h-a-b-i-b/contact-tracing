@@ -3,6 +3,7 @@ public with sharing class CTUserTabController {
     /**
      *   Get User Details
      */
+    @AuraEnabled
     public static UserInformation getUserDetails(String personId) {
         
         UserInformation info = new UserInformation();
