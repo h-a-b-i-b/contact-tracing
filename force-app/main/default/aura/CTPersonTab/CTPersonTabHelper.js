@@ -25,10 +25,20 @@
                         component.set("v.userFound", false);
                         this.showToast("ERROR!", "Please enter valid user Id!", "error");
                     }
-                } else if (state === "ERROR") {
-                    console.error(state.getError());
+                } else if (state === "INCOMPLETE") {
                     component.set("v.userFound", false);
-                    this.showToast("ERROR!", "Please enter valid user Id!", "error");
+                    this.showToast("ERROR!", "Server response: " + state, "error");
+                } else if (state === "ERROR") {
+                    component.set("v.userFound", false);
+                    var errors = response.getError();
+
+                    if (errors) {
+                        if (errors[0] && errors[0].message) {
+                            this.showToast("ERROR!", errors[0].message, "error");
+                        }
+                    } else {
+                        this.showToast("ERROR!", "Unknown error", "error");
+                    }
                 }
             });
 
