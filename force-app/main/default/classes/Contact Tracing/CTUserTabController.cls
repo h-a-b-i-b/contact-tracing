@@ -11,6 +11,9 @@ public with sharing class CTUserTabController {
         // Get person's details
         Person__c person = CTPersonController.getPersonById(personId);
 
+        // Early returns on no person found
+        if(person == null) return null;
+
         if(person != null) {
             info.name = person.Name;
             info.token = person.Token__c;

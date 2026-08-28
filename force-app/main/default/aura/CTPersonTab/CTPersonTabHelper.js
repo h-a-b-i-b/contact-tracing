@@ -7,45 +7,45 @@
 
         try {
             recordId = component.find("user-input").get("v.value");
-
-            console.log("After record Id");
-
-
-            console.log("recordId", recordId);
-
-
-
-            console.log("recordId from helper: ", recordId);
-
             var action = component.get("c.getUserDetails");
 
             action.setParams({ personId: recordId });
-
-            console.log("action set in helper...");
-
             action.setCallback(this, function (response) {
-                console.log("inside callback...");
-
                 const state = response.getState();
-                console.log("state: ", state);
                 const result = response.getReturnValue();
+
                 console.log("result: ", result);
 
                 if (state === "SUCCESS") {
-                    console.log('User details:', response.getReturnValue());
-                    component.set("v.personDetails", response.getReturnValue());
-                    component.set("v.data", response.getReturnValue().contacts);
+                    if (result != null) {
+                        component.set("v.personDetails", result);
+                        component.set("v.data", result.contacts);
+                        component.set("v.userFound", true);
+                    } else {
+                        component.set("v.userFound", false);
+                        this.showToast("ERROR!", "Please enter valid user Id!", "error");
+                    }
+                } else if (state === "ERROR") {
+                    console.error(state.getError());
+                    component.set("v.userFound", false);
+                    this.showToast("ERROR!", "Please enter valid user Id!", "error");
                 }
             });
-
-            console.log("Enqueuing action...");
 
             $A.enqueueAction(action);
 
         } catch (e) {
             console.error(e);
         }
+    },
 
-        console.log("Helper execution completed.");
+    showToast: function (title, message, type) {
+        var toastEvent = $A.get("e.force:showToast");
+        toastEvent.setParams({
+            "title": title,
+            "message": message,
+            "type": type
+        });
+        toastEvent.fire();
     }
 })

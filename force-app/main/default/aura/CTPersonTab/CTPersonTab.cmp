@@ -4,6 +4,7 @@
     <aura:attribute name="personDetails" type="Object" />
     <aura:attribute name="data" type="Object" />
     <aura:attribute name="columns" type="List" />
+    <aura:attribute name="userFound" type="Boolean" />
 
     <div class="main-container">
         <div class="header-container">
@@ -39,7 +40,7 @@
         </div>
 
         <div class="card-container slds-align_absolute-center">
-            <aura:if isTrue="{!v.personDetails}">
+            <aura:if isTrue="{!v.userFound}">
     
                 <!-- SLDS 1 -->
                 <article class="slds-card card-style">

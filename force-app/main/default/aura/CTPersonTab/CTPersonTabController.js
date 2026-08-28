@@ -1,15 +1,6 @@
 ({
     handleClick : function(component, event, helper) {
         console.log("handleClick called..." );
-        console.log("Befter record Id");
-        
-
-
-
-
-
-
-
 
         // Define colums
         component.set('v.columns', [
